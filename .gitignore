@@ -1,0 +1,5 @@
+.idea*
+.terraform.lock.hcl
+.terraform*
+result.out
+terraform.tfstate
