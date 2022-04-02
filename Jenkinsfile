@@ -51,6 +51,7 @@ pipeline {
             steps{
                 script {
                   result = sh(returnStdout: true, script: 'aws organizations list-accounts --query "Accounts[*].Arn"').trim()
+                  import groovy.json.*
                   echo (jsonSlurper.parseText(result))
                 }
                 withAWS(region: 'eu-west-1', role: 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') {
