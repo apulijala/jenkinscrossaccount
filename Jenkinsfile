@@ -1,6 +1,4 @@
-@Library('first-shared-lib') _
-import groovy.json.*
-                
+
 
 def terraform_plan(todo, rolearn) {
     withAWS(region: 'eu-west-1', role: rolearn) {
