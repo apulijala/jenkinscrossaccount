@@ -1,6 +1,6 @@
 // Jenkins file. 
 @Library('first-shared-lib') _
-welcomeJob 'lambdatest'
+
 
 pipeline{
     agent{
@@ -15,6 +15,7 @@ pipeline{
     stages{
         stage("Terraform Init") {
             steps{
+                welcomeJob 'lambdatest'
                 withAWS(region: 'eu-west-1', role: 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') {
                     sh "terraform init -no-color"
                 }
