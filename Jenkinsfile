@@ -1,4 +1,6 @@
+@Library('first-shared-lib') _
 import groovy.json.*
+                
 
 def terraform_plan(todo, rolearn) {
     withAWS(region: 'eu-west-1', role: rolearn) {
@@ -10,6 +12,7 @@ def terraform_plan(todo, rolearn) {
             }
     }
 }
+
 
 def terraform_apply(todo, rolearn) {
     withAWS(region: 'eu-west-1', role: rolearn) {
@@ -50,12 +53,9 @@ pipeline {
     stages{
         
         stage("Terraform Init") {
-            steps{
-                script {
-                  result = sh(returnStdout: true, script: 'aws organizations list-accounts --query "Accounts[*].Arn"').trim()
-                  import groovy.json.*
-                  echo (jsonSlurper.parseText(result))
-                }
+
+               welcomeJob "Arvind K. Pulijala"
+          
                 withAWS(region: 'eu-west-1', role: 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') {
                     sh "terraform init -no-color"
                 }
@@ -90,6 +90,6 @@ pipeline {
         }
 
         }
-    }
 }
+
 
