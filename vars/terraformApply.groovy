@@ -1,5 +1,15 @@
-def call(todo, rolearn, funcName) {
-        funcName(todo,rolearn)
+def call(todo, rolearn, whatodo) {
+    
+    if (whatodo == "apply") {
+        terraform_apply(todo,rolearn)
+    }
+    else if (whatodo == "plan") {
+        terraform_plan(todo,rolearn)
+    }
+}
+
+def terraform_plan(todo,rolearn) {
+    echo "In terraform plan"
 }
 
 def terraform_apply(todo,rolearn) {

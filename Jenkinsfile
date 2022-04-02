@@ -45,7 +45,8 @@ pipeline{
                         
                         if (env.applyplan == "Yes") {
                             terraformApply todo,
-                                'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole'
+                                'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole', 
+                                'apply'
                  
                         }
                         else {
