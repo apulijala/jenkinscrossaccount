@@ -1,3 +1,4 @@
+import groovy.json.*
 def terraform_plan(todo, rolearn) {
     withAWS(region: 'eu-west-1', role: rolearn) {
             if (todo == "Apply") {
@@ -20,6 +21,10 @@ def terraform_apply(todo, rolearn) {
     }
 }
 
+def accounts() {
+    println("To do ")
+
+}
 
 pipeline {
 
