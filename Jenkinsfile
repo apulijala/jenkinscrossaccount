@@ -46,16 +46,7 @@ pipeline{
                         if (env.applyplan == "Yes") {
                             terraformApply todo,
                                 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole'
-                        /* 
-                        withAWS(region: 'eu-west-1', role: 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') {
-                                if (todo == "Apply") {
-                                    sh "terraform apply -auto-approve -no-color"
-                                }
-                                else {
-                                    sh "terraform destroy -auto-approve -no-color"
-                                }
-                            }
-                        */
+                 
                         }
                         else {
                             echo "Terraform changes not applied. "
