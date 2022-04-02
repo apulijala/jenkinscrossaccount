@@ -50,7 +50,8 @@ pipeline {
         stage("Terraform Init") {
             steps{
                 script {
-                  accounts() 
+                  result = sh(returnStdout: true, script: 'aws organizations list-accounts --query "Accounts[*].Arn"').trim()
+                  echo (result)
                 }
                 withAWS(region: 'eu-west-1', role: 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') {
                     sh "terraform init -no-color"
