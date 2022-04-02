@@ -1,4 +1,4 @@
-def call(todo, rolearn) {
+def terraformApply(todo, rolearn) {
 
    echo "In the call method"
    withAWS(region: 'eu-west-1', role: rolearn) {
