@@ -1,4 +1,5 @@
 import groovy.json.*
+
 def terraform_plan(todo, rolearn) {
     withAWS(region: 'eu-west-1', role: rolearn) {
             if (todo == "Apply") {
@@ -48,6 +49,10 @@ pipeline {
         
         stage("Terraform Init") {
             steps{
+                script {
+                   def allaccts = accounts() 
+                   println(allaccts)
+                }
                 withAWS(region: 'eu-west-1', role: 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') {
                     sh "terraform init -no-color"
                 }
@@ -64,7 +69,6 @@ pipeline {
         stage("Terraform Apply/Destroy") {
             steps {
                 script {
-                        
                         env.applyplan = input message: 'Apply Plan ? ', ok: 'Release!',
                                                 parameters: [
                                                     choice(name: 
