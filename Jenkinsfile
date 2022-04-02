@@ -36,21 +36,10 @@ pipeline {
             
             script {
 
-                withAWS(region: 'eu-west-1', role: 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') {
-                    if (todo == "Apply") {
-                            sh "terraform plan -no-color"
-                    }
-                    else {
-                        sh "terraform plan -destroy -no-color"
-                    }
+                apply_destroy(todo, 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole')
             }
 
             }
-             /* 
-                withAWS(region: 'eu-west-1', role: 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') {
-                    sh "terraform plan -no-color"
-                }
-            */
         }
     }
 
@@ -76,4 +65,3 @@ pipeline {
        }
      }
    }
-}
