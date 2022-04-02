@@ -1,3 +1,7 @@
+// Jenkins file. 
+@Library('first-shared-lib') _
+welcomeJob 'lambdatest'
+
 pipeline{
     agent{
         label "west"
