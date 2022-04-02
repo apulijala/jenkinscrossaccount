@@ -65,8 +65,13 @@ pipeline {
                                                     choices: 'Yes\nNo', 
                                                     description: 'Do you want to apply Terraform Plan ?')
                                                 ]
-                    echo "${env.applyplan}"                                                
-                  
+                    echo "${env.applyplan}"       
+                     if (env.applyplan == "Yes") {
+                       apply_destroy(todo, 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') 
+                    }
+                    else {
+                        echo "Terraform changes not applied. "
+                    }
          }
        }
      }
