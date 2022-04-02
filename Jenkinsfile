@@ -21,9 +21,20 @@ pipeline{
 
     stage("Terraform Plan"){
         steps{
+
             withAWS(region: 'eu-west-1', role: 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') {
-                sh "terraform plan -no-color"
+                if (todo == "Apply") {
+                        sh "terraform plan -no-color"
+                }
+                else {
+                    sh "terraform plan -destroy -no-color"
+                }
             }
+             /* 
+                withAWS(region: 'eu-west-1', role: 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') {
+                    sh "terraform plan -no-color"
+                }
+            */
         }
     }
 
