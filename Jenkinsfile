@@ -11,6 +11,7 @@ def apply_destroy(todo, rolearn) {
 
 
 pipeline {
+
     agent{
         label "west"
     }
@@ -31,37 +32,7 @@ pipeline {
         }
     }
 
-    stage("Terraform Plan"){
-        steps{
-            
-            script {
-
-                apply_destroy(todo, 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole')
-            }
-
-            }
-        }
     }
 
-     stage("Terraform Apply/Destroy") {
-        steps {
-            script {
-                    
-                    env.applyplan = input message: 'Apply Plan ? ', ok: 'Release!',
-                                            parameters: [
-                                                choice(name: 
-                                                'apply', 
-                                                    choices: 'Yes\nNo', 
-                                                    description: 'Do you want to apply Terraform Plan ?')
-                                                ]
-                    echo "${env.applyplan}"       
-                     if (env.applyplan == "Yes") {
-                       apply_destroy(todo, 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') 
-                    }
-                    else {
-                        echo "Terraform changes not applied. "
-                    }
-         }
-       }
-     }
+     
    }
