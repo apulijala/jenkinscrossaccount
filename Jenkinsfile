@@ -53,8 +53,8 @@ pipeline {
     stages{
         
         stage("Terraform Init") {
-
-               welcomeJob "Arvind K. Pulijala"
+            
+               // welcomeJob "Arvind K. Pulijala"
           
                 withAWS(region: 'eu-west-1', role: 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') {
                     sh "terraform init -no-color"
