@@ -23,14 +23,16 @@ def terraform_apply(todo, rolearn) {
 }
 
 def accounts() {
-    String result = "aws organizations list-accounts ".execute().text
-    println result
+    /* 
+        String result = "aws organizations list-accounts ".execute().text
+        println result
 
-    def jsonSlurper = new JsonSlurper()
-    def object = jsonSlurper.parseText(result)
-    for (arn in  object["Accounts"]["Arn"]) 
-        println(" Arn is " + arn)
-    return object["Accounts"]["Arn"]
+        def jsonSlurper = new JsonSlurper()
+        def object = jsonSlurper.parseText(result)
+        for (arn in  object["Accounts"]["Arn"]) 
+            println(" Arn is " + arn)
+        return object["Accounts"]["Arn"]
+    */
 }
 
 pipeline {
