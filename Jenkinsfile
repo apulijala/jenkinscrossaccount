@@ -50,8 +50,7 @@ pipeline {
         stage("Terraform Init") {
             steps{
                 script {
-                   def allaccts = accounts() 
-                   echo(allaccts)
+                  accounts() 
                 }
                 withAWS(region: 'eu-west-1', role: 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') {
                     sh "terraform init -no-color"
