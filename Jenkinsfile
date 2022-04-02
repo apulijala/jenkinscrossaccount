@@ -1,10 +1,22 @@
-def apply_destroy(todo, rolearn) {
+def terraform_plan(todo, rolearn) {
     withAWS(region: 'eu-west-1', role: rolearn) {
             if (todo == "Apply") {
                     sh "terraform plan -no-color"
             }
             else {
                 sh "terraform plan -destroy -no-color"
+            }
+    }
+}
+
+def terraform_apply(todo, rolearn) {
+
+    withAWS(region: 'eu-west-1', role: rolearn) {
+            if (todo == "Apply") {
+                    sh "terraform apply"
+            }
+            else {
+                sh "terraform destroy"
             }
     }
 }
@@ -35,7 +47,7 @@ pipeline {
         stage("Terraform Plan"){
             steps{
                     script {
-                        apply_destroy(todo, 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole')
+                        terraoform_plan(todo, 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole')
                     }
                 }
             }
@@ -52,13 +64,13 @@ pipeline {
                                                     ]
                         echo "${env.applyplan}"       
                         if (env.applyplan == "Yes") {
-                        apply_destroy(todo, 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') 
+                            terraform_apply(todo, 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') 
                         }
                         else {
                             echo "Terraform changes not applied. "
                         }
             }
-       }
+        }
 
         }
     }
