@@ -24,15 +24,20 @@ pipeline {
 
     stages{
         
-    stage("Terraform Init") {
-        steps{
-            withAWS(region: 'eu-west-1', role: 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') {
-                 sh "terraform init -no-color"
+        stage("Terraform Init") {
+            steps{
+                withAWS(region: 'eu-west-1', role: 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole') {
+                    sh "terraform init -no-color"
+                }
             }
         }
     }
+    stage("Terraform Plan"){
+        steps{
+                script {
+                    apply_destroy(todo, 'arn:aws:iam::679540287007:role/JenkinsDevelopmentRole')
+                }
+            }
+        }
+}
 
-    }
-
-     
-   }
