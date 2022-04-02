@@ -10,7 +10,7 @@ def apply_destroy(todo, rolearn) {
 }
 
 
-pipeline{
+pipeline {
     agent{
         label "west"
     }
@@ -67,7 +67,8 @@ pipeline{
                                                 ]
                     echo "${env.applyplan}"                                                
                   
-        }
-      }
-    }
+         }
+       }
+     }
+   }
 }
